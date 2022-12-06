@@ -1,13 +1,10 @@
 import Head from 'next/head'
-import GoogleLogin from 'react-google-login';
+import GoogleAuth from "../components/Auth/GoogleAuth";
 
 import styles from '../styles/Home.module.css';
 
-const responseGoogle = (response) => {
-    console.log(response);
-}
-
 export default function Home() {
+
   return (
     <div className={styles.container}>
       <Head>
@@ -17,13 +14,7 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-          <GoogleLogin
-              clientId="107088676671-v4932rhnac80bc4a26etvd4ulncu47go.apps.googleusercontent.com"
-              buttonText="Login"
-              onSuccess={responseGoogle}
-              onFailure={responseGoogle}
-              cookiePolicy={'single_host_origin'}
-          />
+
       </main>
     <footer>
       </footer>

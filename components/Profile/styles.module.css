@@ -1,0 +1,54 @@
+.wrapper{
+    position: relative;
+    cursor: pointer;
+}
+
+.profileImg{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background: #0070f3;
+    color: white;
+    width: 40px;
+    height: 40px;
+}
+
+.dropdownWrapper{
+    position: absolute;
+    width:160px;
+    top: 100%;
+    margin-top: 5px;
+    left: 50%;
+    margin-left: -120px;
+    background: white;
+    color: black;
+    animation: fade-in linear 0.12s;
+}
+.dropdownList{
+    list-style-type: none;
+    padding: 0;
+}
+.dropdownList li{
+    text-decoration: none;
+    transition: 0.2s;
+    padding:8px 15px;
+}
+.dropdownList li:hover{
+    background: #efefef;
+    transition: 0.2s;
+}
+
+@keyframes fade-in {
+    from {
+        opacity:0;
+        max-height: 0;
+        width: 120px;
+    }
+
+    to {
+        opacity:1;
+        max-height: 800px;
+        width: 160px;
+    }
+}
