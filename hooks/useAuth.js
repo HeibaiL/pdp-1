@@ -25,7 +25,7 @@ const useAuth = () => {
         return null
     }
 
-    const onResponseGoogle =  async (googleData) => {
+    const onResponseGoogle = async (googleData) => {
         try{
             const data = await googleAuth(googleData.tokenId)
             if(data){

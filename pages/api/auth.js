@@ -1,9 +1,10 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 
-export const getMe = async ({token}) => {
+export const getMe = async (token) => {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/profile/me`, {headers: {authorization: token}})
   return res.json()
 }
+
 export const googleAuth = async (token) => {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/google-auth`, {
     method: "POST",
@@ -16,6 +17,7 @@ export const googleAuth = async (token) => {
   })
   return res.json()
 }
+
 export async function githubLogin(code) {
   try {
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/github-auth`,{

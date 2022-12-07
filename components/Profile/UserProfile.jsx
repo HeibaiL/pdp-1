@@ -20,7 +20,7 @@ const UserProfile = ({user, options}) => {
 
     return <div className={styles.wrapper} ref={ref}>
         {user.picture
-            ? <img src={user.picture}/>:
+            ? <img src={user.picture} onClick={toggleDropdown} className={styles.profileImg}/>:
             <div className={styles.profileImg} onClick={toggleDropdown}>
                 {initials}
             </div>}
