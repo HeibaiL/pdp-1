@@ -12,6 +12,7 @@
     "next": "12.2.3",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-github-login": "^1.0.3",
     "react-google-login": "^5.2.2",
     "react-login-github": "^1.0.8"
   },
