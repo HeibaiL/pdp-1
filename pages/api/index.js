@@ -12,7 +12,6 @@ $axios.interceptors.request.use(
     async config => {
         const accessToken = localStorage.getItem(TOKENS.ACCESS_TOKEN)
         if(accessToken){
-            console.log(accessToken.split(" ")[1])
             config.headers.authorization = "Bearer " + accessToken.split(" ")[1];
         }
 

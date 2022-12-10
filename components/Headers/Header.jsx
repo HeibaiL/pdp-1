@@ -16,7 +16,6 @@ const Header = () => {
     const {user, logout, getProfile} = useAuth();
     const { sendMessage, lastMessage, readyState, ReadyState } = useWs();
 
-
     const connectionStatus = {
         [ReadyState.CONNECTING]: 'Connecting',
         [ReadyState.OPEN]: 'Open',
