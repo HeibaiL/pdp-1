@@ -4,10 +4,12 @@
   justify-content: space-between;
   padding: 15px 30px;
 }
+
 .wrapper img{
   height: 40px;
   width: 40px;
 }
+
 .flexContainer{
   display: flex;
 }

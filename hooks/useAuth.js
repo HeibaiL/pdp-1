@@ -1,7 +1,7 @@
 import {useUserContext} from "../context/User";
-import {getMe, githubLogin, googleAuth} from "../pages/api/auth";
+import {getMe, githubLogin, googleAuth, logout, logoutUser, updateRefreshToken} from "../pages/api/auth";
 
-const TOKENS = {
+export const TOKENS = {
     ACCESS_TOKEN: "pdp_access-token",
     REFRESH_TOKEN: "pdp_refresh-token"
 }
@@ -14,20 +14,32 @@ const useAuth = () => {
         localStorage.setItem(TOKENS.REFRESH_TOKEN, "Bearer " + refresh)
     }
 
-    const getProfile = async () => {
-        const refresh = localStorage.getItem(TOKENS.REFRESH_TOKEN);
-        if(refresh) {
-           const user = await getMe(refresh);
-            if(user){
-                setUser(user)
+    const getTokens = () => {
+        if (typeof window !== 'undefined') {
+            const lsAccessToken = localStorage.getItem(TOKENS.ACCESS_TOKEN);
+            const lsRefreshToken = localStorage.getItem(TOKENS.REFRESH_TOKEN);
+            return {
+                accessToken: lsAccessToken? lsAccessToken : null,
+                refreshToken: lsRefreshToken? lsRefreshToken : null
             }
         }
+    }
+
+    const getProfile = async () => {
+        const {refreshToken, accessToken} = getTokens()
+        if(accessToken || refreshToken) {
+           const data = await getMe(accessToken);
+           setUser(data)
+
+
+        }
+
         return null
     }
 
     const onResponseGoogle = async (googleData) => {
         try{
-            const data = await googleAuth(googleData.tokenId)
+            const data = await googleAuth(googleData.tokenId);
             if(data){
                 login(data)
             }
@@ -48,12 +60,15 @@ const useAuth = () => {
 
     }
 
-    const logout = () => {
+    const logout = async () => {
+        const {refreshToken} = getTokens();
+        await logoutUser(refreshToken.split(" ")[1])
+
         setUser(null)
         localStorage.removeItem(TOKENS.ACCESS_TOKEN)
         localStorage.removeItem(TOKENS.REFRESH_TOKEN)
     }
 
-    return {login, logout, user, onResponseGoogle, getProfile, onResponseGithub}
+    return {login, logout, user, onResponseGoogle, getProfile, onResponseGithub, getTokens}
 }
 export default useAuth

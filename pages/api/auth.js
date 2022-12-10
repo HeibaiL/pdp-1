@@ -1,37 +1,37 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
+import $axios from "./index";
 
-export const getMe = async (token) => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/profile/me`, {headers: {authorization: token}})
-  return res.json()
+export const getMe = async () => {
+  try{
+    let res =  await $axios.get("/profile/me")
+    return res.data
+  }catch(ex){
+    console.log(ex)
+  }
 }
 
 export const googleAuth = async (token) => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/google-auth`, {
-    method: "POST",
-    body: JSON.stringify({
-      token
-    }),
-    headers: {
-      "Content-Type": "application/json"
-    }
-  })
-  return res.json()
+  const res = await $axios.post(`/google-auth`, {token})
+  return res.data
 }
 
 export async function githubLogin(code) {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/github-auth`,{
-      method: "POST",
-      body: JSON.stringify({code}),
-      headers: {
-        "Content-Type": "application/json"
-      }
-    })
+    const res = await $axios.post(`/github-auth`,{ code })
     /**
      * GitHub returns data as a string we must parse.
      */
-    return res.json()
+    return res.data
   }catch(ex){
     console.log(ex)
   }
-};
+}
+export const logoutUser = async (refreshToken) => {
+  await $axios.post("/logout", {refreshToken})
+}
+
+export const updateRefreshToken = async (refreshToken) => {
+  const res = await $axios.post(`/refresh`, {refreshToken})
+  return res.data
+
+}
