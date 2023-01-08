@@ -1,5 +1,6 @@
-import {useUserContext} from "../context/User";
 import {getMe, githubLogin, googleAuth, logout, logoutUser, updateRefreshToken} from "../pages/api/auth";
+import {getUser, setAccessToken, setRefreshToken, setUser} from "../features/user/userSlice";
+import {useDispatch, useSelector} from "react-redux";
 
 export const TOKENS = {
     ACCESS_TOKEN: "pdp_access-token",
@@ -7,9 +8,11 @@ export const TOKENS = {
 }
 
 const useAuth = () => {
-    const {user, setUser} = useUserContext();
+    const user = useSelector(getUser)
+    const dispatch = useDispatch()
 
     const _saveTokens = (access, refresh) => {
+        console.log(access, refresh)
         localStorage.setItem(TOKENS.ACCESS_TOKEN, "Bearer " + access)
         localStorage.setItem(TOKENS.REFRESH_TOKEN, "Bearer " + refresh)
     }
@@ -28,10 +31,8 @@ const useAuth = () => {
     const getProfile = async () => {
         const {refreshToken, accessToken} = getTokens()
         if(accessToken || refreshToken) {
-           const data = await getMe(accessToken);
-           setUser(data)
-
-
+            const data = await getMe(accessToken);
+            dispatch(setUser(data))
         }
 
         return null
@@ -55,16 +56,20 @@ const useAuth = () => {
     }
 
     const login = (data) => {
-        setUser(data.user)
+        dispatch(setUser(data.user))
+        dispatch(setAccessToken(data.accessToken))
+        dispatch(setRefreshToken(data.refreshToken))
         _saveTokens(data.accessToken, data.refreshToken)
 
     }
 
     const logout = async () => {
         const {refreshToken} = getTokens();
+        console.log(refreshToken)
         await logoutUser(refreshToken.split(" ")[1])
-
-        setUser(null)
+        dispatch(setUser(null))
+        dispatch(setAccessToken(null))
+        dispatch(setRefreshToken(null))
         localStorage.removeItem(TOKENS.ACCESS_TOKEN)
         localStorage.removeItem(TOKENS.REFRESH_TOKEN)
     }
