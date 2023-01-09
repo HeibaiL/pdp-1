@@ -33,5 +33,4 @@ export const logoutUser = async (refreshToken) => {
 export const updateRefreshToken = async (refreshToken) => {
   const res = await $axios.post(`/refresh`, {refreshToken})
   return res.data
-
 }
