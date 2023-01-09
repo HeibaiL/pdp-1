@@ -50,7 +50,6 @@ export const messengerSlice = createSlice({
 })
 
 
-
 export const getMessengerData = state => state.messenger;
 
 export default messengerSlice.reducer

@@ -10,12 +10,6 @@ export const userSlice = createSlice({
         setUser: (state, action) => {
             state.userData = action.payload
         },
-        setAccessToken: (state,action) => {
-            state.accessToken = action.payload
-        },
-        setRefreshToken: (state,action) => {
-            state.refreshToken = action.payload
-        },
     }
 })
 

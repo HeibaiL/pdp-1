@@ -1,8 +1,12 @@
 import Head from 'next/head'
+
 import GoogleAuth from "../components/Auth/GoogleAuth";
-import styles from '../styles/Home.module.css';
 import Messenger from "../components/Messenger/Messenger";
+
 import useAuth from "../hooks/useAuth";
+
+import styles from '../styles/Home.module.css';
+
 
 export default function Home() {
     const {user, logout, getProfile} = useAuth();

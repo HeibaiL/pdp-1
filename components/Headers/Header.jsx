@@ -26,7 +26,7 @@ const Header = () => {
 
     useEffect(() => {
         if(lastMessage && lastMessage) {
-            console.log(lastMessage.data)
+            // console.log(lastMessage.data)
         }
     }, [lastMessage])
 

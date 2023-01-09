@@ -1,10 +1,11 @@
 import React, {useRef, useState} from "react";
 
-import styles from "./styles.module.css"
 import useClickOutside from "../../hooks/useClickOutside";
 
-const UserProfile = ({user, options}) => {
+import styles from "./styles.module.css"
 
+
+const UserProfile = ({user, options}) => {
     const [dropdownOpened, setDropdownOpened] = useState(false);
     const ref = useRef();
     useClickOutside(ref, () => setDropdownOpened(false))
@@ -36,4 +37,6 @@ const UserProfile = ({user, options}) => {
         </div>}
     </div>
 }
+
+
 export default UserProfile

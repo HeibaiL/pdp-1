@@ -1,16 +1,16 @@
-import styles from "./styles.module.css"
+import {useState} from "react";
 import {useSelector} from "react-redux";
+
 import {getMessengerData} from "../../features/messenger/messengerSlice";
 import {getUser} from "../../features/user/userSlice";
-import {useState} from "react";
 
+import styles from "./styles.module.css"
 
 
 const Messenger = () => {
     const [input, setInput] = useState('')
     const chatData = useSelector(getMessengerData);
     const userData = useSelector(getUser)
-    console.log(chatData, userData)
     const handleChange = (event) => {
         setInput(event.target.value)
     }
@@ -19,7 +19,6 @@ const Messenger = () => {
          chatData[0].recipient
        : chatData[0].postedByUser
 
-    console.log(recipientName)
     return <div className={styles.messenger}>
         <div className={styles.container}>
             <div className={styles.messenger_header}>
@@ -48,5 +47,6 @@ const Messenger = () => {
         </div>
     </div>
 }
+
 
 export default Messenger;
