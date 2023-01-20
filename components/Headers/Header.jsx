@@ -26,7 +26,7 @@ const Header = () => {
 
     useEffect(() => {
         if(lastMessage && lastMessage) {
-            console.log(lastMessage.data)
+            // console.log(lastMessage.data)
         }
     }, [lastMessage])
 
@@ -46,7 +46,7 @@ const Header = () => {
 
     return <div className={styles.wrapper}>
         <img src={"https://cdn-icons-png.flaticon.com/512/2991/2991148.png"}/>
-        <button onClick={postMessage}>Send message</button>
+        {/*<button onClick={postMessage}>Send message</button>*/}
         {user
             ? <UserProfile user={user} options={profileDropdownMenu}/>
             :<div className={styles.flexContainer}>
